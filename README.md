@@ -40,6 +40,8 @@ git clone https://github.com/yourname/mbray.git
 cd mbray
 mkdir build && cd build
 cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release
+ninja
+sudo ninja install # if you want to install it system-wide
 ```
 
 ## Command-line Arguments
