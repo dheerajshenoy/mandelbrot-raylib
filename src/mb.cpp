@@ -54,6 +54,7 @@ void
 Mandelbrot::loop() noexcept
 {
     using namespace Raylib;
+
     while (!WindowShouldClose())
     {
         // Camera movement
