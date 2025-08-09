@@ -70,8 +70,8 @@ Mandelbrot::loop() noexcept
 
             m_pixels.resize(m_width * m_height);
 
-            Image img = GenImageColor(m_width, m_height, RAYWHITE);
-            m_texture = LoadTextureFromImage(img);
+            const Image img = GenImageColor(m_width, m_height, RAYWHITE);
+            m_texture       = LoadTextureFromImage(img);
             UnloadImage(img);
 
             m_needsUpdate = true;
@@ -158,7 +158,7 @@ Mandelbrot::loop() noexcept
         if (m_hud_shown)
         {
 
-            Color bg = Fade(BLACK, 0.5f); // semi-transparent background
+            const Color bg = Fade(BLACK, 0.5f); // semi-transparent background
 
             const int fontSize    = 30;
             const int padding     = 10;
@@ -185,7 +185,7 @@ Mandelbrot::loop() noexcept
             }
 
             // Calculate total height
-            int totalHeight = hudLines.size() * lineSpacing;
+            const int totalHeight = hudLines.size() * lineSpacing;
 
             // Draw one background rectangle for all lines
             DrawRectangle(startX - padding, startY - padding,
