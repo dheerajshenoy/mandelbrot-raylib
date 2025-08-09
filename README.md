@@ -1,9 +1,6 @@
 # mbray — Mandelbrot Visualizer in C++ with raylib
 
-
-
-  https://github.com/user-attachments/assets/6ed91aff-6d15-47b7-848a-68d152cccaec
-
+https://github.com/user-attachments/assets/6ed91aff-6d15-47b7-848a-68d152cccaec
 
 **mbray** is an interactive Mandelbrot set visualizer written in modern C++ using [raylib](https://www.raylib.com/).
 It renders the fractal in real time, supports smooth zooming, panning, and multiple color modes.
