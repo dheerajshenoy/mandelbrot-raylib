@@ -7,8 +7,12 @@ init_args(argparse::ArgumentParser &args)
     args.add_argument("--color").default_value("bw").help(
         "Color mode for the Mandelbrot set. (Supported values: bw, color)");
 
-    args.add_argument("--iter").default_value(50).help(
-        "Max number of iterations carried out for each Mandelbrot pixel test.");
+    args.add_argument("--iter").default_value("50").help(
+        "Max number of iterations carried out for each "
+        "Mandelbrot pixel test.");
+
+    args.add_argument("--hud").default_value("true").help(
+        "Visibility of the HUD.");
 }
 
 int
