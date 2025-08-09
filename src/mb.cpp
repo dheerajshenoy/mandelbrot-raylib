@@ -206,5 +206,14 @@ Mandelbrot::init_args(const argparse::ArgumentParser &args) noexcept
         else
             m_color = MBColor::BW;
     }
-    else if (args.is_used("--iter")) { m_max_iter = args.get<int>("--iter"); }
+
+    if (args.is_used("--iter"))
+    {
+        m_max_iter = stoi(args.get<std::string>("--iter"));
+    }
+
+    if (args.is_used("--hud"))
+    {
+        m_hud_shown = (args.get<std::string>("--hud") == "true");
+    }
 }
