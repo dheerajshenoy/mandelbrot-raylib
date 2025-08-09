@@ -133,14 +133,6 @@ Mandelbrot::loop() noexcept
 
         if (m_hud_shown)
         {
-            DrawText(std::format("Zoom: {:.1f}", m_zoom).c_str(), 40, 40, 30,
-                     RAYWHITE);
-            DrawText("C - cycle colors", 40, 80, 30, RAYWHITE);
-            DrawText("H - toggle hud", 40, 120, 30, RAYWHITE);
-            DrawText(std::format("Iter: {}", m_max_iter).c_str(), 40, 160, 30,
-                     RAYWHITE);
-            DrawText("I - increase iter by one", 40, 200, 30, RAYWHITE);
-            DrawText("U - decrease iter by one", 40, 240, 30, RAYWHITE);
 
             Color bg = Fade(BLACK, 0.5f); // semi-transparent background
 
