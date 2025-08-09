@@ -13,6 +13,10 @@ init_args(argparse::ArgumentParser &args)
 
     args.add_argument("--hud").default_value("true").help(
         "Visibility of the HUD.");
+
+    args.add_argument("--no-resize")
+        .flag()
+        .help("On window size change, don't change anything.");
 }
 
 int

@@ -55,8 +55,31 @@ Mandelbrot::loop() noexcept
 {
     using namespace Raylib;
 
+    int prevWidth  = m_width;
+    int prevHeight = m_height;
+
     while (!WindowShouldClose())
     {
+        m_width  = GetScreenWidth();
+        m_height = GetScreenHeight();
+
+        if (m_resize_aware && (m_width != prevWidth || m_height != prevHeight))
+        {
+            // Window resized, update resources accordingly
+            UnloadTexture(m_texture);
+
+            m_pixels.resize(m_width * m_height);
+
+            Image img = GenImageColor(m_width, m_height, RAYWHITE);
+            m_texture = LoadTextureFromImage(img);
+            UnloadImage(img);
+
+            m_needsUpdate = true;
+
+            prevWidth  = m_width;
+            prevHeight = m_height;
+        }
+
         // Camera movement
         // Log scaling makes speed changes less aggressive
         const float baseSpeed  = 10.0f;
@@ -250,4 +273,6 @@ Mandelbrot::init_args(const argparse::ArgumentParser &args) noexcept
     {
         m_hud_shown = (args.get<std::string>("--hud") == "true");
     }
+
+    if (args.is_used("--no-resize")) { m_resize_aware = false; }
 }
