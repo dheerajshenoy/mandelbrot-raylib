@@ -1,9 +1,34 @@
+#include "argparse.hpp"
 #include "mb.hpp"
 
-int
-main()
+static void
+init_args(argparse::ArgumentParser &args)
 {
+    args.add_argument("--color").default_value("bw").help(
+        "Color mode for the Mandelbrot set. (Supported values: bw, color)");
+
+    args.add_argument("--iter").default_value(50).help(
+        "Max number of iterations carried out for each Mandelbrot pixel test.");
+}
+
+int
+main(int argc, char *argv[])
+{
+    argparse::ArgumentParser program("mbray");
+    init_args(program);
+    try
+    {
+        program.parse_args(argc, argv);
+    }
+    catch (const std::exception &e)
+    {
+        std::cerr << "Error: " << e.what() << "\n";
+        std::exit(-1);
+    }
+
     Mandelbrot m;
+    m.init_args(program);
     m.loop();
+
     return 0;
 }
