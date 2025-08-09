@@ -15,14 +15,16 @@ It renders the fractal in real time, supports smooth zooming, panning, and multi
 
 ## Controls
 
-| Key / Mouse       | Action                                  |
-|-------------------|-----------------------------------------|
-| **W / A / S / D** | Move view up / left / down / right       |
-| **Mouse Wheel**   | Zoom in/out                              |
-| **H**             | Toggle HUD display                      |
-| **C**             | Cycle color modes                       |
-| **R**             | Reset to default view                   |
-| **ESC**           | Quit                                     |
+| Key / Mouse       | Action                   |
+|-------------------|--------------------------|
+| **W / A / S / D** | up / left / down / right |
+| **Mouse Wheel**   | Zoom in/out              |
+| **H**             | Toggle HUD display       |
+| **C**             | Cycle color modes        |
+| **R**             | Reset to default view    |
+| **I**             | Increase iter            |
+| **U**             | Decrease iter            |
+| **ESC**           | Quit                     |
 
 ## Build Instructions
 
