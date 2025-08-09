@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(mandelbrot-raylib
+project(mbray
     VERSION 0.1
-    DESCRIPTION "Mandelbrot Visualizer"
+    DESCRIPTION "Mandelbrot Visualizer using Raylib"
     LANGUAGES CXX
 )
 
