@@ -7,6 +7,8 @@
 Mandelbrot::Mandelbrot()
 {
     using namespace Raylib;
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE);
+
     InitWindow(0, 0, "Mandelbrot Explorer");
     SetTargetFPS(60);
 
