@@ -55,6 +55,7 @@ private:
     Raylib::Camera2D m_camera{ 0 };
     bool m_needsUpdate{ true };
     bool m_hud_shown{ true };
+    bool m_resize_aware{ true };
     float m_zoom{ 1.0f };
     Raylib::Vector2 m_lastMousePos{ 0, 0 };
     std::vector<Raylib::Color> m_pixels{};
