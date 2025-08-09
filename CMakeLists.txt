@@ -27,13 +27,10 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
 
 find_package(raylib REQUIRED)
 
-
-# set(HEADERS)
-    # src/mb.hpp)
-
 # Sources
 set(SOURCES
     src/main.cpp
+    src/mb.cpp
 )
 
 # Executable
