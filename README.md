@@ -29,7 +29,7 @@ It renders the fractal in real time, supports smooth zooming, panning, and multi
 ### Dependencies
 
 - C++23 capable compiler (GCC, Clang, MSVC)
-- raylib development libraries
+- ![raylib](https://raylib.com) library
 - CMake (recommended)
 - Ninja (or make) (build dependency)
 
