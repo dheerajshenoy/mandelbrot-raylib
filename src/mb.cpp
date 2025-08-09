@@ -168,13 +168,13 @@ Mandelbrot::loop() noexcept
 
             std::vector<std::string> hudLines = {
                 std::format("Zoom: {:.1f}", m_zoom),
-                "C: cycle colors",
-                "H: toggle hud",
+                "C - cycle colors",
+                "H - toggle hud",
                 std::format("Iter: {}", m_max_iter),
-                "I: iter + 1",
-                "U: iter - 1",
-                "R: reset view",
-                "ESC: quit"
+                "I - increase iter by one",
+                "U - decrease iter by one",
+                "R - reset view",
+                "ESC - quit"
             };
 
             // Find the widest line
