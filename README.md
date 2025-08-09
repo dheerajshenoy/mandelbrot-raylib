@@ -39,3 +39,28 @@ cd mbray
 mkdir build && cd build
 cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release
 ```
+
+## Command-line Arguments
+
+`mbray` supports several optional command-line arguments:
+
+- `--color`
+  Sets the color mode for rendering the Mandelbrot set.
+  Supported values:
+  - `bw` – Black on white background
+  - `wb` – White on black background
+  - `color` – HSV-based coloring
+  Default: `bw`
+
+- `--iter`
+  Sets the maximum number of iterations used for each pixel in the Mandelbrot test.
+  Higher values produce more detail but can slow down rendering.
+  Default: `50`
+
+- `--hud`
+  Toggles the visibility of the Heads-Up Display (HUD).
+  Accepts `true` or `false`.
+  Default: `true`
+
+- `--no-resize`
+  On window size change, do not resize the mandelbrot set.
