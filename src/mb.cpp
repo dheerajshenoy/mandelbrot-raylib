@@ -108,7 +108,7 @@ Mandelbrot::loop() noexcept
         if (wheel != 0)
         {
             m_camera.zoom *= (1 + wheel * 0.1f);
-            m_zoom += 0.1f;
+            m_zoom += 0.1 * wheel;
         }
 
         if (IsKeyPressed(KEY_R)) zoomReset();
