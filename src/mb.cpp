@@ -173,6 +173,7 @@ Mandelbrot::loop() noexcept
                 std::format("Iter: {}", m_max_iter),
                 "I - increase iter by one",
                 "U - decrease iter by one",
+                "R - reset view",
                 "ESC - quit"
             };
 
