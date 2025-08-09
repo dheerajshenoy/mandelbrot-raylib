@@ -141,6 +141,47 @@ Mandelbrot::loop() noexcept
                      RAYWHITE);
             DrawText("I - increase iter by one", 40, 200, 30, RAYWHITE);
             DrawText("U - decrease iter by one", 40, 240, 30, RAYWHITE);
+
+            Color bg = Fade(BLACK, 0.5f); // semi-transparent background
+
+            const int fontSize    = 30;
+            const int padding     = 10;
+            const int startX      = 40;
+            const int startY      = 40;
+            const int lineSpacing = 40; // fontSize + 10px spacing
+
+            std::vector<std::string> hudLines = {
+                std::format("Zoom: {:.1f}", m_zoom),
+                "C - cycle colors",
+                "H - toggle hud",
+                std::format("Iter: {}", m_max_iter),
+                "I - increase iter by one",
+                "U - decrease iter by one",
+                "ESC - quit"
+            };
+
+            // Find the widest line
+            int maxWidth = 0;
+            for (const auto &line : hudLines)
+            {
+                int w = MeasureText(line.c_str(), fontSize);
+                if (w > maxWidth) maxWidth = w;
+            }
+
+            // Calculate total height
+            int totalHeight = hudLines.size() * lineSpacing;
+
+            // Draw one background rectangle for all lines
+            DrawRectangle(startX - padding, startY - padding,
+                          maxWidth + padding * 2, totalHeight + padding * 2,
+                          Fade(BLACK, 0.5f));
+
+            // Draw text lines on top
+            for (size_t i = 0; i < hudLines.size(); i++)
+            {
+                DrawText(hudLines[i].c_str(), startX, startY + i * lineSpacing,
+                         fontSize, RAYWHITE);
+            }
         }
         EndDrawing();
     }
