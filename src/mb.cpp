@@ -83,9 +83,10 @@ Mandelbrot::loop() noexcept
 
         // Camera movement
         // Log scaling makes speed changes less aggressive
-        const float baseSpeed  = 10.0f;
-        const float zoomFactor = std::pow(2.0f, -std::log2(m_camera.zoom));
-        const float moveSpeed  = baseSpeed * zoomFactor;
+        const float baseSpeed = 10.0f;
+        const float minSpeed  = 0.5f;
+        const float maxSpeed  = 10.0f;
+        const float moveSpeed = baseSpeed / m_camera.zoom;
 
         if (IsKeyDown(KEY_W)) m_camera.target.y -= moveSpeed;
         if (IsKeyDown(KEY_S)) m_camera.target.y += moveSpeed;
@@ -208,44 +209,56 @@ Mandelbrot::loop() noexcept
 void
 Mandelbrot::renderChunk(const Mandelbrot::RenderParams &p) noexcept
 {
-
     for (int py = p.startY; py < p.endY; ++py)
     {
         for (int px = 0; px < m_width; ++px)
         {
-            const double x0 = map<double>(0, m_width, p.a, p.b, px);
-            const double y0 = map<double>(0, m_height, p.c, p.d, py);
+            // Map pixel to complex plane
+            double mappedX = map<double>(0, m_width, p.a, p.b, px);
+            double mappedY = map<double>(0, m_height, p.c, p.d, py);
 
-            int i     = 0;
-            double zx = 0.0, zy = 0.0;
+            double zx, zy, cx, cy;
+
+            if (m_type == FractalType::Mandelbrot)
+            {
+                // Mandelbrot: z starts at 0, c is pixel
+                zx = 0.0;
+                zy = 0.0;
+                cx = mappedX;
+                cy = mappedY;
+            }
+            else // Julia
+            {
+                // Julia: z starts at pixel, c is fixed constant
+                zx = mappedX;
+                zy = mappedY;
+                cx = m_julia_cx;
+                cy = m_julia_cy;
+            }
+
+            int i      = 0;
             double zx2 = 0.0, zy2 = 0.0;
+
             while (i < m_max_iter && zx2 + zy2 <= 4.0)
             {
-                zy  = 2.0 * zx * zy + y0;
-                zx  = zx2 - zy2 + x0;
-                zx2 = zx * zx;
-                zy2 = zy * zy;
+                zx2        = zx * zx;
+                zy2        = zy * zy;
+                double tmp = zx2 - zy2 + cx;
+                zy         = 2.0 * zx * zy + cy;
+                zx         = tmp;
                 ++i;
             }
 
             Raylib::Color color;
             if (m_color == MBColor::BW)
-            {
-                // Black inside, white outside
                 color = (i == m_max_iter) ? Raylib::BLACK : Raylib::RAYWHITE;
-            }
             else if (m_color == MBColor::WB)
-            {
-                // White inside, HSV outside
                 color = (i == m_max_iter) ? Raylib::RAYWHITE : Raylib::BLACK;
-            }
             else
-            {
                 color = (i == m_max_iter)
                             ? Raylib::BLACK
                             : Raylib::ColorFromHSV(
-                                  map(0, m_max_iter, 0, 1400, i), 1.0, 1.0);
-            }
+                                  map(0, m_max_iter, 0, 360, i), 1.0, 1.0);
 
             p.pixels[py * m_width + px] = color;
         }
@@ -279,4 +292,17 @@ Mandelbrot::init_args(const argparse::ArgumentParser &args) noexcept
     if (args.is_used("--no-resize")) { m_resize_aware = false; }
 
     if (args.is_used("--fps")) { m_fps = stoi(args.get<std::string>("--fps")); }
+
+    if (args.is_used("-c"))
+    {
+        std::vector<double> julia_cs = args.get<std::vector<double>>("-c");
+
+        if (julia_cs.size() == 2)
+        {
+            m_julia_cx = julia_cs.at(0);
+            m_julia_cy = julia_cs.at(1);
+        }
+    }
+
+    if (args.is_used("--julia")) { m_type = FractalType::Julia; }
 }

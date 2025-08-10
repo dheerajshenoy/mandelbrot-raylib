@@ -14,6 +14,12 @@ class Mandelbrot
 {
 public:
 
+    enum class FractalType
+    {
+        Mandelbrot,
+        Julia
+    };
+
     enum class MBColor
     {
         BW = 0,
@@ -61,4 +67,7 @@ private:
     std::vector<Raylib::Color> m_pixels{};
     Raylib::Texture2D m_texture;
     MBColor m_color{ MBColor::BW };
+    FractalType m_type{ FractalType::Mandelbrot };
+    double m_julia_cx{ -0.7 };
+    double m_julia_cy{ 0.27015 };
 };

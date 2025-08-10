@@ -16,6 +16,14 @@ init_args(argparse::ArgumentParser &args)
 
     args.add_argument("--fps").default_value("60").help("Frames per second.");
 
+    args.add_argument("--julia").flag().help("Switch to julia set mode");
+
+    args.add_argument("-c")
+        .help("c value for julia set")
+        .nargs(2)
+        .default_value(std::vector<double>{ -0.7, 0.27015 })
+        .scan<'g', double>();
+
     args.add_argument("--no-resize")
         .flag()
         .help("On window size change, don't change anything.");
