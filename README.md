@@ -1,4 +1,4 @@
-# mbray — Mandelbrot Visualizer in C++ with raylib
+# mbray — Mandelbrot & Julia set visualizer in C++ with raylib
 
 https://github.com/user-attachments/assets/6ed91aff-6d15-47b7-848a-68d152cccaec
 
@@ -7,6 +7,7 @@ It renders the fractal in real time, supports smooth zooming, panning, and multi
 
 ## Features
 
+- View mandelbrot or julia set
 - Realtime rendering with multithreading
 - Zoom and pan with mouse wheel and WASD keys
 - Color modes: **Black–White**, **White–Black**, and **Color**
@@ -70,3 +71,11 @@ sudo ninja install # if you want to install it system-wide
 
 - `--no-resize`
   On window size change, do not resize the mandelbrot set.
+
+- `--julia`
+  View julia set (default c: -0.7269 + 0.18889i)
+
+- `-c`
+  Specify the complex function for the julia set
+  Accepts `list of two numbers separated by space`
+  Default: `-0.7269 0.18889`
