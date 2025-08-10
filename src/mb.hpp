@@ -51,7 +51,7 @@ private:
 
     Raylib::Vector2 m_default_target;
     float m_default_zoom;
-    int m_width, m_height, m_max_iter{ 50 };
+    int m_width, m_height, m_max_iter{ 50 }, m_fps{ 60 };
     Raylib::Camera2D m_camera{ 0 };
     bool m_needsUpdate{ true };
     bool m_hud_shown{ true };

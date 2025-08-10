@@ -10,7 +10,6 @@ Mandelbrot::Mandelbrot()
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
 
     InitWindow(0, 0, "Mandelbrot Explorer");
-    SetTargetFPS(60);
 
     m_width  = GetScreenWidth();
     m_height = GetScreenHeight();
@@ -54,6 +53,8 @@ void
 Mandelbrot::loop() noexcept
 {
     using namespace Raylib;
+
+    SetTargetFPS(m_fps);
 
     int prevWidth  = m_width;
     int prevHeight = m_height;
@@ -276,4 +277,6 @@ Mandelbrot::init_args(const argparse::ArgumentParser &args) noexcept
     }
 
     if (args.is_used("--no-resize")) { m_resize_aware = false; }
+
+    if (args.is_used("--fps")) { m_fps = stoi(args.get<std::string>("--fps")); }
 }
